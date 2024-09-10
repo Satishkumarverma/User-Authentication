@@ -1,0 +1,42 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}
+Login
+{% endblock title %}
+{% block navbar %}{% endblock navbar %}
+{% block content %}
+<div class="container">
+  <div class="container text-center" style="display: flex; justify-content: center;">
+    {% if messages %}
+          {% for m in messages %}
+            <div class="alert {% if m.tags %}alert-{{ m.tags }}{% endif %} mt-3" id="msg" style="width: 45%; margin-bottom: -40px;" role="alert"><i class="fa-solid fa-circle-check"></i>  {{ m }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    <div class="row my-3">
+      <div class="col-sm-6 offset-sm-3 mt-5">
+        <h3 class="text-light">Login</h3>
+        <hr class="text-light" />
+        <form action="" method="post" novalidate class="shadow p-5 bg-light rounded">
+          {% csrf_token %}
+          {% for f in fm %}
+            <div class="fm-group py-2">
+              {{ f.label_tag }}{{ f }}
+              <small class="text-danger">{{ f.errors|striptags }}</small>
+            </div>
+          {% endfor %}
+          <a href="{% url "user_reset_pass" %}">forget password?</a><br />
+          <input type="submit" class="btn btn-primary mt-2" value="Login" />
+          <div class="text-center text-primary">
+            <small><b>Don't have Account ? <a href="{% url "signup" %}" class="text-danger">Signup</a></b></small>
+          </div>
+          {% if fm.non_field_errors %}
+            {% for error in fm.non_field_errors %}
+              <small class="text-danger">{{ error }}</small>
+            {% endfor %}
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

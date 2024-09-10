@@ -1,0 +1,42 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}
+  Home
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container text-center" style="display: flex; justify-content: center;">
+{% if messages %}
+      {% for m in messages %}
+        <div class="alert {% if m.tags %}alert-{{ m.tags }}{% endif %}" id="msg" style="width: 45%;" role="alert"><i class="fa-solid fa-circle-check"></i>  {{ m }}</div>
+      {% endfor %}
+    {% endif %}
+  </div>
+<div class="container">
+<div class="text-center bg-body-tertiary rounded-3" style="background-color: #212529; margin-top: 5%;">
+  <h4 class="text-white pt-4 pb-2"><i class="fa-solid fa-user-lock" style="color: #ffffff;"></i></h4>
+  <h1 class="text-body-emphasis text-light">Welcome to Home Page!</h1>
+  <div class="row my-3">
+  <div class="col-sm-6 offset-sm-3 mb-5 rounded-3 border border-white text-light">
+    <p class="pt-2">Name: {{ user.name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Last Login: {{ user.last_login }}</p>
+    <p>Joined Date: {{ user.date_joined }}</p>
+  </div>
+  </div>
+</div>
+</div>
+  {% else %}
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="row my-3">
+    <main class="px-3 col-sm-6 offset-sm-3 text-center text-light pt-5">
+      <h1>User Authentication</h1>
+      <p class="lead">User authentication verifies the identity of a user attempting to gain access to a network or computing resource by authorizing a human-to-machine transfer of credentials during interactions on a network to confirm a user's authenticity.</p>
+      <p class="lead">
+        <a href="https://www.techtarget.com/searchsecurity/definition/user-authentication" target="_blank" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
+      </p>
+    </main>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}
