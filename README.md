@@ -5,7 +5,7 @@ This project is designed by using following technologies:-<br>
 Front-end:<br>
 Html, Css, JavaScript, Bootstrap<br>
 Back-end:<br>
-Pyhton, Django<br>
+Python, Django<br>
 Database:<br>
 SQLite3<br>
 
